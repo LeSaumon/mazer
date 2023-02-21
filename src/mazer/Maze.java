@@ -1,20 +1,16 @@
 package mazer;
 
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Maze {
-    public static final Color BLACK = Color.rgb(0, 18, 25);
-    public static final Color PRIMARY_BLUE = Color.rgb(0, 95, 115);
-    public static final Color SECONDARY_BLUE = Color.rgb(10, 147, 150);
-    public static final Color LIGHT_BLUE = Color.rgb(148, 210, 189);
-    public static final Color PALE_YELLOW = Color.rgb(233, 216, 166);
-    public static final Color ORANGE = Color.rgb(238, 155, 0);
-    public static final Color DARK_ORANGE = Color.rgb(202, 103, 2);
-    public static final Color DARKER_ORANGE = Color.rgb(202, 103, 2);
-    public static final Color LIGHT_RED = Color.rgb(187, 62, 3);
-    public static final Color RED = Color.rgb(174, 32, 18);
-    public static final Color DARK_RED = Color.rgb(155, 34, 38);
+    public static final Color DARK_BLUE = Color.rgb(24, 78, 119);
+    public static final Color BLUE = Color.rgb(30, 96, 145);
+    public static final Color LIGHT_BLUE = Color.rgb(26, 117, 159);
+    public static final Color LIGHTER_BLUE = Color.rgb(22, 138, 173);
+    public static final Color RED = Color.rgb(217, 4, 41);
 
     public static final int WALLS = 0;
     public static final int FLOORS = 1;
@@ -35,10 +31,10 @@ public class Maze {
             { WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS },
             { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS, WALLS, WALLS },
             { WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, TARGET },
-            { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS, WALLS, WALLS },
+            { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS },
     };
 
-    public static Rectangle[][] buildedMazeMap = {
+    public static Rectangle[][] builtMazeMap = {
             { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
             { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
             { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
@@ -52,55 +48,72 @@ public class Maze {
             { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
     };
 
-    public int[][] getMazeMap() {
-        return SKELETON_MAZE_MAP;
+    public Maze(){
+        buildMaze();
     }
 
-    public static void setRectangleFromSkeleton(Color color, int[] row, int rowIndex, int tileIndex) {
-        System.out.println(buildedMazeMap[row[rowIndex]][tileIndex]);
-        buildedMazeMap[row[rowIndex]][tileIndex].setFill(color);
-        buildedMazeMap[row[rowIndex]][tileIndex].setWidth(WIDTH);
-        buildedMazeMap[row[rowIndex]][tileIndex].setHeight(HEIGHT);
-        if (tileIndex == 0) {
-            buildedMazeMap[row[rowIndex]][tileIndex].setX(0);
-        } else {
-            buildedMazeMap[row[rowIndex]][tileIndex]
-                    .setX(buildedMazeMap[row[rowIndex]][tileIndex - 1].getX() + WIDTH);
+    public void setMazeInContainer(Pane mazeContainer, StackPane masterContainer){
+        for (Rectangle[] row : builtMazeMap) {
+            mazeContainer.getChildren().addAll(row);
         }
-        if (rowIndex == 0){
-            buildedMazeMap[row[rowIndex]][tileIndex].setY(0);
-        } else {
-            buildedMazeMap[row[rowIndex]][tileIndex]
-            .setY(buildedMazeMap[row[rowIndex]][tileIndex].getY() + HEIGHT);
-        }
-        buildedMazeMap[row[rowIndex]][tileIndex].setY(HEIGHT);
+        masterContainer.getChildren().add(mazeContainer);
     }
 
-    public static Rectangle[][] buildMazeMap() {
-        int rowIndex = 0;
-        int tileIndex = 0;
-        for (int[] row : SKELETON_MAZE_MAP) {
-            for (int tile : row) {
-                if (tileIndex == 11) {
-                    tileIndex = 0;
+    public int[] getTargetPosition(){
+        int[] targetLocation = new int[]{};
+        for (int rowIndex = 0; rowIndex < SKELETON_MAZE_MAP.length; rowIndex++) {
+            for (int tileIndex = 0; tileIndex < SKELETON_MAZE_MAP[rowIndex].length; tileIndex++) {
+                if (SKELETON_MAZE_MAP[rowIndex][tileIndex] == TARGET){
+                    targetLocation[0] = rowIndex;
+                    targetLocation[1] = tileIndex;
+                    break;
                 }
-                switch (tile) {
+            }
+        }
+        return targetLocation;
+    }
+
+
+    public static void setRectangleFromSkeleton(Color color, int rowIndex, int tileIndex) {
+        Rectangle currentTile = builtMazeMap[rowIndex][tileIndex];
+        if (rowIndex != 0) {
+            currentTile.setY(builtMazeMap[rowIndex - 1][tileIndex].getY() + HEIGHT);
+        } else {
+            currentTile.setY(0);
+        }
+        if (tileIndex == 0) {
+            currentTile.setX(0);
+        } else {
+            Rectangle previousTile = builtMazeMap[rowIndex][tileIndex - 1];
+            currentTile.setX(previousTile.getX() + WIDTH);
+        }
+        currentTile.setFill(color);
+        currentTile.setWidth(WIDTH);
+        currentTile.setHeight(HEIGHT);
+
+    }
+
+    public static Rectangle[][] buildMaze(){
+        for (int rowIndex = 0; rowIndex < SKELETON_MAZE_MAP.length; rowIndex++) {
+            for (int tileIndex = 0; tileIndex < SKELETON_MAZE_MAP[rowIndex].length; tileIndex++) {
+                switch (SKELETON_MAZE_MAP[rowIndex][tileIndex]) {
                     case WALLS:
-                        setRectangleFromSkeleton(BLACK, row, rowIndex, tileIndex);
+                        setRectangleFromSkeleton(DARK_BLUE, rowIndex, tileIndex);
                         break;
                     case FLOORS:
-                        setRectangleFromSkeleton(BLACK, row, rowIndex, tileIndex);
+                        setRectangleFromSkeleton(LIGHT_BLUE, rowIndex, tileIndex);
+                        break;
                     case PLAYER:
-                        setRectangleFromSkeleton(BLACK, row, rowIndex, tileIndex);
+                        setRectangleFromSkeleton(RED, rowIndex, tileIndex);
+                        break;
+                    case TARGET:
+                        setRectangleFromSkeleton(RED, rowIndex, tileIndex);
+                        break;
                     default:
-                        // TARGET
-                        setRectangleFromSkeleton(BLACK, row, rowIndex, tileIndex);
                         break;
                 }
-                tileIndex += 1;
             }
-            rowIndex += 1;
         }
-        return buildedMazeMap;
+        return builtMazeMap;
     }
 }
