@@ -35,44 +35,91 @@ public class Maze {
     };
 
     public static Rectangle[][] builtMazeMap = {
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
-            { new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT), new Rectangle(WIDTH,HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
     };
 
-    public Maze(){
+    public Maze() {
         buildMaze();
     }
 
-    public void setMazeInContainer(Pane mazeContainer, StackPane masterContainer){
+    public void setMazeInContainer(Pane mazeContainer, StackPane masterContainer) {
         for (Rectangle[] row : builtMazeMap) {
             mazeContainer.getChildren().addAll(row);
         }
         masterContainer.getChildren().add(mazeContainer);
     }
 
-    public int[] getTargetPosition(){
-        int[] targetLocation = new int[]{};
-        for (int rowIndex = 0; rowIndex < SKELETON_MAZE_MAP.length; rowIndex++) {
+    public int[] getTargetPosition() {
+        int[] targetLocation = new int[] {};
+        lookout: for (int rowIndex = 0; rowIndex < SKELETON_MAZE_MAP.length; rowIndex++) {
             for (int tileIndex = 0; tileIndex < SKELETON_MAZE_MAP[rowIndex].length; tileIndex++) {
-                if (SKELETON_MAZE_MAP[rowIndex][tileIndex] == TARGET){
+                if (SKELETON_MAZE_MAP[rowIndex][tileIndex] == TARGET) {
                     targetLocation[0] = rowIndex;
                     targetLocation[1] = tileIndex;
-                    break;
+                    break lookout;
                 }
             }
         }
         return targetLocation;
     }
 
+    public Rectangle getPlayerPosition() {
+        Rectangle playerPosition = new Rectangle(WIDTH, HEIGHT);
+        searchForPlayer: for (int rowIndex = 0; rowIndex < SKELETON_MAZE_MAP.length; rowIndex++) {
+            for (int tileIndex = 0; tileIndex < SKELETON_MAZE_MAP[rowIndex].length; tileIndex++) {
+                if (SKELETON_MAZE_MAP[rowIndex][tileIndex] == PLAYER) {
+                    Rectangle foundPosition = builtMazeMap[rowIndex][tileIndex];
+                    playerPosition.setX(foundPosition.getX());
+                    playerPosition.setY(foundPosition.getY());
+                    break searchForPlayer;
+                }
+            }
+        }
+        return playerPosition;
+    }
 
     public static void setRectangleFromSkeleton(Color color, int rowIndex, int tileIndex) {
         Rectangle currentTile = builtMazeMap[rowIndex][tileIndex];
@@ -93,7 +140,7 @@ public class Maze {
 
     }
 
-    public static Rectangle[][] buildMaze(){
+    public static Rectangle[][] buildMaze() {
         for (int rowIndex = 0; rowIndex < SKELETON_MAZE_MAP.length; rowIndex++) {
             for (int tileIndex = 0; tileIndex < SKELETON_MAZE_MAP[rowIndex].length; tileIndex++) {
                 switch (SKELETON_MAZE_MAP[rowIndex][tileIndex]) {
@@ -104,10 +151,10 @@ public class Maze {
                         setRectangleFromSkeleton(LIGHT_BLUE, rowIndex, tileIndex);
                         break;
                     case PLAYER:
-                        setRectangleFromSkeleton(RED, rowIndex, tileIndex);
+                        setRectangleFromSkeleton(LIGHTER_BLUE, rowIndex, tileIndex);
                         break;
                     case TARGET:
-                        setRectangleFromSkeleton(RED, rowIndex, tileIndex);
+                        setRectangleFromSkeleton(LIGHTER_BLUE, rowIndex, tileIndex);
                         break;
                     default:
                         break;
