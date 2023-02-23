@@ -11,26 +11,28 @@ public class Maze {
     public static final Color LIGHT_BLUE = Color.rgb(26, 117, 159);
     public static final Color LIGHTER_BLUE = Color.rgb(22, 138, 173);
     public static final Color RED = Color.rgb(217, 4, 41);
+    public static final Pane container = new Pane();
 
     public static final int WALLS = 0;
     public static final int FLOORS = 1;
     public static final int PLAYER = 2;
     public static final int TARGET = 3;
+    public static final int STOP = 4;
 
     public static final int WIDTH = 50;
     public static final int HEIGHT = 50;
 
     public static final int[][] SKELETON_MAZE_MAP = {
             { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS },
-            { PLAYER, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS },
+            { WALLS, FLOORS, FLOORS, PLAYER, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS },
             { WALLS, WALLS, WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS },
-            { WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS },
+            { WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, STOP, WALLS },
             { WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, WALLS },
-            { WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, WALLS },
+            { WALLS, FLOORS, WALLS, FLOORS, FLOORS, STOP, FLOORS, FLOORS, WALLS, FLOORS, WALLS },
             { WALLS, FLOORS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS },
             { WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS },
             { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS, WALLS, WALLS },
-            { WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, TARGET },
+            { WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, STOP, FLOORS, FLOORS, TARGET },
             { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS },
     };
 
@@ -106,19 +108,18 @@ public class Maze {
         return targetLocation;
     }
 
-    public Rectangle getPlayerPosition() {
-        Rectangle playerPosition = new Rectangle(WIDTH, HEIGHT);
-        searchForPlayer: for (int rowIndex = 0; rowIndex < SKELETON_MAZE_MAP.length; rowIndex++) {
+    public static int[] getInitialPlayerLocationIndexes() {
+        int[] targetLocation = new int[2];
+        lookout: for (int rowIndex = 0; rowIndex < SKELETON_MAZE_MAP.length; rowIndex++) {
             for (int tileIndex = 0; tileIndex < SKELETON_MAZE_MAP[rowIndex].length; tileIndex++) {
                 if (SKELETON_MAZE_MAP[rowIndex][tileIndex] == PLAYER) {
-                    Rectangle foundPosition = builtMazeMap[rowIndex][tileIndex];
-                    playerPosition.setX(foundPosition.getX());
-                    playerPosition.setY(foundPosition.getY());
-                    break searchForPlayer;
+                    targetLocation[0] = rowIndex;
+                    targetLocation[1] = tileIndex;
+                    break lookout;
                 }
             }
         }
-        return playerPosition;
+        return targetLocation;
     }
 
     public static void setRectangleFromSkeleton(Color color, int rowIndex, int tileIndex) {
@@ -157,6 +158,7 @@ public class Maze {
                         setRectangleFromSkeleton(LIGHTER_BLUE, rowIndex, tileIndex);
                         break;
                     default:
+                        setRectangleFromSkeleton(LIGHT_BLUE, rowIndex, tileIndex);
                         break;
                 }
             }

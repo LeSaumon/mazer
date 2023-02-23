@@ -1,29 +1,64 @@
 package mazer;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 public class Player {
-    private final int radius = 20;
-    String name;
-    Color color = Maze.RED;
-    Circle circle = new Circle(radius);
+    public final int radius = 20;
+    public final Color COLOR = Maze.RED;
+    public final Circle CIRCLE = new Circle(radius);
 
-    public Player(String name){
-        this.name = name;
-        circle.setFill(color);
+    public double xPos;
+    public double yPos;
+    double rowIndex;
+    double tileIndex;
+    public double speed = Maze.WIDTH;
+
+    public Label position;
+    public String labelText;
+
+    public Player() {
+        CIRCLE.setFill(COLOR);
     }
 
-    public Circle getCircle(){
-        return circle;
+    public void setPlayerToDefaultLocalisationInMaze(Pane mazeContainer) {
+        int[] playerMapIndexes = Maze.getInitialPlayerLocationIndexes();
+        this.rowIndex = playerMapIndexes[0];
+        this.tileIndex = playerMapIndexes[1];
+        this.xPos = this.tileIndex * 50;
+        this.yPos = this.rowIndex * 50;
+        updatePlayerInMaze(mazeContainer);
     }
 
-    public void setPlayerInMaze(Rectangle playerLocation, Pane container){
-        this.circle.setLayoutX(playerLocation.getX() + Maze.WIDTH / 2);
-        this.circle.setLayoutY(playerLocation.getY() + Maze.HEIGHT / 2);
-        container.getChildren().add(this.circle);
+    public int[] extractPlayerIndexesFromPosition(){
+        int[] response = new int[2];
+        response[0] = (int)this.xPos / 50;
+        response[1] = (int)this.yPos / 50;
+        return response;
+    }
+
+    public void printIndexes(){
+        System.out.println(String.format("rowIndex: %s - tileIndex: %s", this.rowIndex, this.tileIndex));
+    }
+
+    public void updatePlayerInMaze(Pane mazeContainer){
+        mazeContainer.getChildren().remove(this.CIRCLE);
+        this.setCirclePosition();
+        this.setIndexPosition();
+        mazeContainer.getChildren().add(this.CIRCLE);
+    }
+
+    public void setCirclePosition(){
+        int gap = Maze.WIDTH / 2;
+        this.CIRCLE.setLayoutX(this.xPos + gap);
+        this.CIRCLE.setLayoutY(this.yPos + gap);
+    }
+
+    public void setIndexPosition(){
+        this.rowIndex = this.yPos / Maze.HEIGHT;
+        this.tileIndex = this.xPos / Maze.WIDTH;
     }
 
 }
