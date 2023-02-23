@@ -15,7 +15,8 @@ public interface Move {
     public static void handlePlayerMove(Scene mainScene, Player player, Maze maze) {
 
         mainScene.setOnKeyPressed(e -> {
-
+            player.playCount += 1;
+            Maze.updateLabelInContainer(Maze.container, player);
             switch (e.getCode()) {
                 case UP:
                     Boolean upperWall = detectWallsOrStop(UP, player);
@@ -82,8 +83,6 @@ public interface Move {
                 handlePlayerMove(mainScene, player, maze);
             } else {
                 if (nextTile == Maze.WALLS) {
-                    handlePlayerMove(mainScene, player, maze);
-                } else {
                     String newDirection = detectNextDirection(mainScene, player, maze, direction);
                     if (newDirection != "NONE") {
                         KeyCode key = KeyCode.getKeyCode(newDirection);
@@ -99,13 +98,13 @@ public interface Move {
     public static String detectNextDirection(Scene mainScene, Player player, Maze maze, KeyCode direction) {
         switch (direction) {
             case UP:
-                return checkAdjacentsTiles(direction, player);
+                return checkAdjacentsTiles(UP, player);
             case LEFT:
-                return checkAdjacentsTiles(direction, player);
+                return checkAdjacentsTiles(LEFT, player);
             case DOWN:
-                return checkAdjacentsTiles(direction, player);
+                return checkAdjacentsTiles(DOWN, player);
             default:
-                return checkAdjacentsTiles(direction, player);
+                return checkAdjacentsTiles(RIGHT, player);
         }
     }
 
@@ -119,14 +118,16 @@ public interface Move {
         tileDict.put(UP, upperTile);
         tileDict.put(LEFT, leftTile);
         tileDict.put(RIGHT, rightTile);
-        if (direction == UP) {
-            tileDict.remove(bottomTile);
-        } else if (direction == LEFT) {
-            tileDict.remove(rightTile);
-        } else if (direction == DOWN) {
-            tileDict.remove(upperTile);
-        } else if (direction == RIGHT) {
-            tileDict.remove(leftTile);
+        tileDict.put(DOWN, bottomTile);
+        // Need to check if we trash out the wrong previoustile
+        if (direction.getName() == "Up") {
+            tileDict.remove(DOWN);
+        } else if (direction.getName() == "Left") {
+            tileDict.remove(RIGHT);
+        } else if (direction.getName() == "Down") {
+            tileDict.remove(UP);
+        } else if (direction.getName() == "Right") {
+            tileDict.remove(LEFT);
         }
         for (Map.Entry tile : tileDict.entrySet()) {
             KeyCode tileDirection = (KeyCode) tile.getKey();
@@ -202,7 +203,7 @@ public interface Move {
                     return false;
                 }
             case DOWN:
-                if (rowIndex == 10) {
+                if (rowIndex == Maze.SKELETON_MAZE_MAP[0].length - 1) {
                     return true;
                 }
                 int downTile = Maze.SKELETON_MAZE_MAP[rowIndex + 1][tileIndex];
@@ -216,7 +217,7 @@ public interface Move {
                 }
 
             case RIGHT:
-                if (tileIndex == 10) {
+                if (tileIndex == Maze.SKELETON_MAZE_MAP[0].length - 1) {
                     return true;
                 }
                 int rightTile = Maze.SKELETON_MAZE_MAP[rowIndex][tileIndex + 1];

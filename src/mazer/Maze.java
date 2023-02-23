@@ -1,5 +1,6 @@
 package mazer;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -22,66 +23,104 @@ public class Maze {
     public static final int WIDTH = 50;
     public static final int HEIGHT = 50;
 
+    public static final int mapWidthNumber = 13;
+    public static final int mapHeightNumber = 13;
+    public static Label label = new Label("");
+
+    // public static final int[][] SKELETON_MAZE_MAP = {
+    //     {WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS}
+    //     {FLOORS, STOP, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS}
+    //     {WALLS, FLOORS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS}
+    //     {WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS}
+    //     {WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS}
+    //     {WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS,FLOORS,FLOORS,FLOORS, WALLS}
+    //     {WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS}
+    //     {WALLS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS}
+    //     {WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS}
+    //     {WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS}
+    //     {WAllS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS}
+    //     {WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS}
+    //     {WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS}
+    // };
+
     public static final int[][] SKELETON_MAZE_MAP = {
-            { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS },
-            { WALLS, FLOORS, FLOORS, PLAYER, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS },
-            { WALLS, WALLS, WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS },
-            { WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, STOP, WALLS },
-            { WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, WALLS },
-            { WALLS, FLOORS, WALLS, FLOORS, FLOORS, STOP, FLOORS, FLOORS, WALLS, FLOORS, WALLS },
-            { WALLS, FLOORS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS },
-            { WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS },
-            { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS, WALLS, WALLS },
-            { WALLS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, STOP, FLOORS, FLOORS, TARGET },
-            { WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS },
+        {WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS},
+        {PLAYER, STOP, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS},
+        {WALLS, FLOORS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS},
+        {WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS},
+        {WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS},
+        {WALLS, FLOORS, WALLS, STOP, FLOORS, FLOORS, FLOORS, STOP, FLOORS,FLOORS,FLOORS,STOP, WALLS},
+        {WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, FLOORS, WALLS},
+        {WALLS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS},
+        {WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS},
+        {WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS},
+        {WALLS, FLOORS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS, WALLS, WALLS, FLOORS, WALLS},
+        {WALLS, FLOORS, FLOORS, STOP, FLOORS, FLOORS, WALLS, FLOORS, FLOORS, FLOORS, WALLS, FLOORS, FLOORS},
+        {WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS, WALLS}
     };
 
     public static Rectangle[][] builtMazeMap = {
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
-            { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
-                    new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
+        {new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT),new Rectangle(WIDTH, HEIGHT)},
     };
+
+    // public static Rectangle[][] builtMazeMap = {
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    //         { new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT),
+    //                 new Rectangle(WIDTH, HEIGHT), new Rectangle(WIDTH, HEIGHT) },
+    // };
 
     public Maze() {
         buildMaze();
@@ -165,4 +204,11 @@ public class Maze {
         }
         return builtMazeMap;
     }
+
+    public static void updateLabelInContainer(Pane mazeContainer, Player player){
+        mazeContainer.getChildren().remove(Maze.label);
+        Maze.label.setText("Nombres de coups : " + player.playCount);
+        mazeContainer.getChildren().add(Maze.label);
+    }
+
 }

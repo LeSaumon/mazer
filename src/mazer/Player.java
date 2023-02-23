@@ -15,12 +15,21 @@ public class Player {
     double rowIndex;
     double tileIndex;
     public double speed = Maze.WIDTH;
+    public int playCount = 0;
 
     public Label position;
     public String labelText;
 
     public Player() {
         CIRCLE.setFill(COLOR);
+    }
+
+    public int getPlayCount(){
+        return this.playCount;
+    }
+
+    public void updateLabel(Player player){
+        Maze.label.setText(String.valueOf(player.getPlayCount()));
     }
 
     public void setPlayerToDefaultLocalisationInMaze(Pane mazeContainer) {
@@ -31,6 +40,7 @@ public class Player {
         this.yPos = this.rowIndex * 50;
         updatePlayerInMaze(mazeContainer);
     }
+
 
     public int[] extractPlayerIndexesFromPosition(){
         int[] response = new int[2];
